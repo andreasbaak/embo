@@ -1,0 +1,2 @@
+# embo
+Embedded Photo Booth
