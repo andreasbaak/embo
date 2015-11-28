@@ -66,11 +66,11 @@ Being build around a high quality DSLR camera, Embo needs to make sure that
 
 <p>In order to remotely trigger the camera, we use standard off-the-shelf wireless camera triggers. These camera triggers connect the user, the DSLR camera and all flashes required to light the scene.</p>
 
-<p>We use an embedded platform (Beaglebone Black) to grab the image from the camera. To this end, we connect the platform to the DSLR camera via an USB cable. The platform runs our Embo software that internally uses the [gphoto2][<a href="http://gphoto.sourceforge.net/proj/gphoto2/">http://gphoto.sourceforge.net/proj/gphoto2/</a>] Linux library for grabbing the image from the camera.</p>
+<p>We use an embedded platform (Beaglebone Black) to grab the image from the camera. To this end, we connect the platform to the DSLR camera via an USB cable. The platform runs our Embo software that internally uses the <a href="http://gphoto.sourceforge.net/proj/gphoto2/">gphoto2</a> Linux library for grabbing the image from the camera.</p>
 
-<p>In addition to the USB connection from the camera to the platform, we use an additional connection from the wireless flash trigger to the GPIO ports of the platform. This enables us to instantaneously react on the event of taking a picture and to let Embo display a "please wait" screen before the actual image is downloaded from the camera. The connection uses the pc-sync output of the wireless flash trigger.</p>
+<p>In addition to the USB connection from the camera to the platform, we use a connection from the wireless flash trigger to the GPIO ports of the platform. This enables us to instantaneously react on the event of taking a picture and to let Embo display a "please wait" screen before the actual image is downloaded from the camera. The connection uses the pc-sync output of the wireless flash trigger.</p>
 
-<p>The platform is connected to a wireless router using an Ethernet cable. The router spans a wireless network that the tablet computer connects to. This way, the tables computer can wirelessly access the picture that has just been downloaded onto the Embo platform. The wireless network is also used in order to let your guests access the current photo gallery using their personal devices.</p>
+<p>The platform is connected to a wireless router using an Ethernet cable. The router spans a wireless network that the tablet computer connects to. This way, the tables computer can wirelessly access and display the picture that has just been taken. The wireless network is also used in order to let your guests access the current photo gallery using their personal devices.</p>
 
 <h1>
 <a id="embo---box-assembly" class="anchor" href="#embo---box-assembly" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embo - Box Assembly</h1>
