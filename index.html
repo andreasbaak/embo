@@ -43,13 +43,13 @@
 
 <p>Embedded Photo Booth (Embo) enables you to build your own photobooth from scratch. To this end, we give detailed instructions in both hardware and software setup. In particular, we provide an open source implementation of a sophisticated photobooth software within this github project. The software was designed with the goal of a highly efficient, zero maintenance operation mode.</p>
 
-<p>embo features a photobooth containing</p>
+<p>Embo features a photobooth containing</p>
 
 <ul>
 <li>A DSLR camera with a prime lense for optimal picture quality</li>
 <li>A 10 inch high resolution tablet that serves as a display for an awesome preview experience</li>
-<li>A wifi router to enable your guests to view the up-to-date photo gallery on their smartphones or tablets</li>
-<li>An embedded board (e.g., beaglebone black) running a custom <a href="https://www.yoctoproject.org/">yocto</a>-based Linux operating system that hosts the photobooth software</li>
+<li>A WiFi router to enable your guests to view the up-to-date photo gallery on their smartphones or tablets</li>
+<li>An embedded platform (e.g., Beaglebone Black) running a custom <a href="https://www.yoctoproject.org/">yocto</a>-based Linux operating system that hosts the Embo software</li>
 </ul>
 
 <p>The Embo is triggered wirelessly using a remote control for the camera.</p>
@@ -57,12 +57,28 @@
 <p>In order to achieve high quality pictures, we suggest (and instruct you) to use a background canvas and an indirect flash (for example, a reflective umbrella or a large softbox). We usually use a white background canvas and flash it from behind in order to remove shadows and other imperfections of the canvas. </p>
 
 <h1>
-<a id="embo-hardware" class="anchor" href="#embo-hardware" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embo-Hardware</h1>
+<a id="embo---internal-technical-design" class="anchor" href="#embo---internal-technical-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embo - Internal Technical Design</h1>
 
-<p>At first, you need to build a container that hosts the camera, the screen (i.e., the tablet), the wifi router and the embedded board. In order to get a rough impression of the container that you will build, you can download the corresponding <a href="http://www.sketchup.com/">SketchUp</a> model here: <a href="res/Photobooth-Sketch.skp">Photobooth-Sketch.skp</a>
+<p><img src="images/photobooth-sketch.jpg" alt="Embo internal technical design">
+Being build around a high quality DSLR camera, Embo needs to make sure that
+1 The user can remotely trigger the camera to take an image
+1 The image is displayed as fast as possible on the screen.</p>
+
+<p>In order to remotely trigger the camera, we use standard off-the-shelf wireless camera triggers. These camera triggers connect the user, the DSLR camera and all flashes required to light the scene.</p>
+
+<p>We use an embedded platform (Beaglebone Black) to grab the image from the camera. To this end, we connect the platform to the DSLR camera via an USB cable. The platform runs our Embo software that internally uses the [gphoto2][<a href="http://gphoto.sourceforge.net/proj/gphoto2/">http://gphoto.sourceforge.net/proj/gphoto2/</a>] Linux library for grabbing the image from the camera.</p>
+
+<p>In addition to the USB connection from the camera to the platform, we use an additional connection from the wireless flash trigger to the GPIO ports of the platform. This enables us to instantaneously react on the event of taking a picture and to let Embo display a "please wait" screen before the actual image is downloaded from the camera. The connection uses the pc-sync output of the wireless flash trigger.</p>
+
+<p>The platform is connected to a wireless router using an Ethernet cable. The router spans a wireless network that the tablet computer connects to. This way, the tables computer can wirelessly access the picture that has just been downloaded onto the Embo platform. The wireless network is also used in order to let your guests access the current photo gallery using their personal devices.</p>
+
+<h1>
+<a id="embo---box-assembly" class="anchor" href="#embo---box-assembly" aria-hidden="true"><span class="octicon octicon-link"></span></a>Embo - Box Assembly</h1>
+
+<p>As you can see, there is quite a bit of hardware involved. You have to hide this hardware from the Embo users. To this end, you need to build a container that hosts the camera, the screen (i.e., the tablet), the wifi router and the embedded board. In order to get a rough impression of the container that you will build, you can download the corresponding <a href="http://www.sketchup.com/">SketchUp</a> model here: <a href="res/Photobooth-Sketch.skp">Photobooth-Sketch.skp</a>
 <img src="images/photobooth-sketch.jpg" alt="Snapshot of the Sketchup Model"></p>
 
-<p>From the outside, Embo looks like this:
+<p>When it's build, Embo looks like this from the outside:
 <img src="images/embo-ext1.jpg" alt="External1"> <img src="images/embo-ext2.jpg" alt="External2"> <img src="images/embo-ext3.jpg" alt="External3"> <img src="images/embo-ext4.jpg" alt="External4"></p>
 
 <p>I used medium-density fiberboard (MDF) wood, 9mm thick, in order build the box. Simple woodscrews are used to affix the boards. Make sure that you pre-drill all holes before you affix the screws in order to avoid splicing the wood. Also, I suggest to countersink the screws in order to avoid that the screw-heads stand out. After the box was build, I painted it with acrylic paint. I diluted the paint with water in order to create a paint that lets you see the vein of the wood of the MDF fiberboard.</p>
